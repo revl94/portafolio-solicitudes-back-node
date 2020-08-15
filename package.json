@@ -1,0 +1,43 @@
+{
+  "name": "Portafolio_Solicitudes_Intelix",
+  "version": "1.0.0",
+  "description": "Backend el cual se utiliza para gestionar seguimientos y evaluaciones de avances de todas las solicitudes y proyectos por parte de los clientes de Intelix.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Intelix Synergy",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
+    "hogan-express": "^0.5.2",
+    "http-status-codes": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "keycloak-admin": "^1.13.0",
+    "keycloak-admin-client": "^0.12.0",
+    "keycloak-connect": "^9.0.0",
+    "keycloak-request-token": "^0.1.0",
+    "mssql": "^5.1.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^1.7.0",
+    "properties-reader": "^0.3.1",
+    "querystring": "^0.2.0",
+    "sequelize": "^5.21.5",
+    "sequelize-auto": "^0.4.29",
+    "tedious": "^6.7.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4",
+    "sequelize-cli": "^5.5.1"
+  }
+}
