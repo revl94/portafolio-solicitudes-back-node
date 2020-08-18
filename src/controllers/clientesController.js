@@ -140,7 +140,7 @@ module.exports = {
                         .then((clientes) => {
                             message = properties.get('message.res.cliUpdated');
                             type = "success";
-                            res.status(HttpStatus.OK).json({message, clientes, type});
+                            res.status(HttpStatus.OK).json(clientes);
                         }, (err) => {
                             console.dir(err);
                             message = properties.get('message.res.errorInternalServer');

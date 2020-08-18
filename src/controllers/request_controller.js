@@ -52,10 +52,10 @@ module.exports = {
 
         models.requestType.findAll({
             where: {
-                id: {
-                    [Op.like]: '%' + req.params.id + '%'
+                typId: {
+                    [Op.like]: req.params.id 
                 },
-                validTo: {
+                typValidTo: {
                     [Op.gte]: dateTime
                 }
             }
@@ -63,11 +63,11 @@ module.exports = {
             .then((request) => {
                 if (request.length > 0) {
                     type = "success";
-                    res.status(HttpStatus.OK).json({message, request, type});
+                    res.status(HttpStatus.OK).json(request);
                 } else {
                     message = properties.get('message.cli.res.notData');
                     type = "Not Data";
-                    res.status(HttpStatus.OK).json({request, type});
+                    res.status(HttpStatus.OK).json(request);
                 }
             }, (err) => {
                 console.dir(err);
@@ -134,7 +134,7 @@ module.exports = {
             .then((request) => {
                 message = properties.get('message.cli.res.okCreated');
                 type = "success";
-                res.status(HttpStatus.OK).json({message, request, type});
+                res.status(HttpStatus.OK).json(request);
             }, (err) => {
                 console.dir(err);
                 message = properties.get('message.res.errorInternalServer');
