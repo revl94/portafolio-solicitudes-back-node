@@ -35,7 +35,7 @@ module.exports = {
               } else {
                   message = properties.get('message.tech.res.notData');
                   type = "Not Data";
-                  res.status(HttpStatus.OK).json({ technical, type });
+                  res.status(HttpStatus.OK).json(technical);
               }
           }, (err) => {
               console.dir(err);
@@ -44,23 +44,30 @@ module.exports = {
               next(err);
           });
     },
-    /*
+    
     getTechnicalAreaById(req,res,next) {
-         models.technicalAreaModel.findAll({
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        let dateTime = date+ ' '+time;
+         models.technicalArea.findAll({
              where: {
-                 id: {
-                     [Op.like]: '%' + req.params.id + '%'
-                 }
-             }
+                teaId: {
+                    [Op.like]: req.params.id 
+                },
+                teaValidTo: {
+                    [Op.gte]: dateTime
+                }
+            }
          })
            .then((technical) => {
                if (technical.length > 0) {
                   type = "success";
-                  res.status(HttpStatus.OK).json({ message, technical, type });
+                  res.status(HttpStatus.OK).json(technical);
                } else {
                    message = properties.get('message.tech.res.notData');
                    type = "Not Data";
-                   res.status(HttpStatus.OK).json({ technical, type });
+                   res.status(HttpStatus.OK).json(technical);
                }
            }, (err) => {
                console.dir(err);
@@ -69,6 +76,7 @@ module.exports = {
                next(err);
            });
     },
+    /*
     getTechnicalAreaByName (req, res, next) {
         models.technicalAreaModel.findAll({
             where: {
@@ -102,7 +110,7 @@ module.exports = {
           .then((technical) => {
               message = properties.get('message.tech.res.okCreated');
               type = "success";
-              res.status(HttpStatus.OK).json({ message, technical, type });
+              res.status(HttpStatus.OK).json(technical);
           }, (err) => {
               console.dir(err);
               message = properties.get('message.res.errorInternalServer');

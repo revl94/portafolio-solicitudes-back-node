@@ -107,7 +107,7 @@ module.exports = {
         .then((clientes) => {
             message = properties.get('message.client.res.okCreated');
             type="success";
-            res.status(HttpStatus.OK).json({message,clientes,type});
+            res.status(HttpStatus.OK).json(clientes);
         }, (err) => {
             console.dir(err);
             message = properties.get('message.res.errorInternalServer');
@@ -140,7 +140,7 @@ module.exports = {
                         .then((clientes) => {
                             message = properties.get('message.res.cliUpdated');
                             type = "success";
-                            res.status(HttpStatus.OK).json({message, clientes, type});
+                            res.status(HttpStatus.OK).json(clientes);
                         }, (err) => {
                             console.dir(err);
                             message = properties.get('message.res.errorInternalServer');
@@ -203,21 +203,21 @@ module.exports = {
         models.client.findAll({
             where: {
                 cliId: {
-                    [Op.like]: '%' + req.params.id + '%'
+                    [Op.like]: req.params.id
                 },
                 cliValidTo: {
                     [Op.gte]: dateTime
                 }
             }
         })
-            .then((request) => {
-                if (request.length > 0) {
+            .then((clientes) => {
+                if (clientes.length > 0) {
                     type = "success";
-                    res.status(HttpStatus.OK).json({message, request, type});
+                    res.status(HttpStatus.OK).json(clientes);
                 } else {
                     message = properties.get('message.cli.res.notData');
                     type = "Not Data";
-                    res.status(HttpStatus.OK).json({request, type});
+                    res.status(HttpStatus.OK).json(clientes);
                 }
             }, (err) => {
                 console.dir(err);

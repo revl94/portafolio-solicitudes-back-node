@@ -18,18 +18,18 @@ request_router.route(urirequest)
 
     // Eliminar solicitud
 request_router.route(uriValidTo)
-.put(RequestController.updateValidToRequest);
+	.put(RequestController.updateValidToRequest);
 
 
 
 /**
  * Filtro para Rutas de solicitudes
  * */
-/*
+
 //Muestra solicitudes por ID
 request_router.route(uriId)
     .get(RequestController.getRequestByID);
-
+/*
 //Muestra solicitudes por Nombre
 request_router.route(uriName)
     .get(RequestController.getRequestByName);

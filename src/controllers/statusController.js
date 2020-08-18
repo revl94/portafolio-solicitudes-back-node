@@ -57,7 +57,7 @@ module.exports = {
         .then((estados) => {
             message = properties.get('message.stats.res.okCreated');
             type = "success";
-            res.status(HttpStatus.OK).json({message, estados, type});
+            res.status(HttpStatus.OK).json(estados);
         }, (err) => {
             console.dir(err);
             message = properties.get('message.res.errorInternalServer');
@@ -70,7 +70,7 @@ module.exports = {
     updateStatus(req,res,next) {
         models.entityStatus.findOne({
             where: {
-                estId: req.params.id
+                estId: req.body.estId
             }
         })
             .then((estados) => {
@@ -84,7 +84,7 @@ module.exports = {
                         .then((estados) => {
                             message = properties.get('message.res.statusUpdated');
                             type = "success";
-                            res.status(HttpStatus.OK).json({message, estados, type});
+                            res.status(HttpStatus.OK).json(estados);
                         }, (err) => {
                             console.dir(err);
                             message = properties.get('message.res.errorInternalServer');
@@ -136,6 +136,40 @@ module.exports = {
                 next(err);
             });
     },
+
+    getStatusById (req, res, next) {
+
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date+' '+time;
+
+    models.entityStatus.findAll({
+      where: {
+        estId: {
+          [Op.like]: req.params.id
+        },
+        estValidTo: {
+          [Op.gte]: dateTime
+        }
+      }
+    })
+      .then((estados) => {
+        if (estados.length > 0) {
+          type = "success";
+          res.status(HttpStatus.OK).json(estados);
+        } else {
+          message = properties.get('message.coa.res.notData');
+          type = "Not Data";
+          res.status(HttpStatus.OK).json({ estados, type });
+        }
+      }, (err) => {
+        console.dir(err);
+        message = properties.get('message.res.errorInternalServer');
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message });
+        next(err);
+      });
+  },
     
     getAllStatusFilter(req,res,next){
 

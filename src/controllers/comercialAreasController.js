@@ -55,10 +55,10 @@ module.exports = {
 
     models.comercialAreas.findAll({
       where: {
-        id: {
-          [Op.like]: '%' + req.params.id + '%'
+        coaId: {
+          [Op.like]: req.params.id
         },
-        validTo: {
+        coaValidTo: {
           [Op.gte]: dateTime
         }
       }
@@ -66,7 +66,7 @@ module.exports = {
       .then((comercialareas) => {
         if (comercialareas.length > 0) {
           type = "success";
-          res.status(HttpStatus.OK).json({ message, comercialareas, type });
+          res.status(HttpStatus.OK).json(comercialareas);
         } else {
           message = properties.get('message.coa.res.notData');
           type = "Not Data";
@@ -159,7 +159,7 @@ module.exports = {
       .then((comercialareas) => {
         message = properties.get('message.coa.res.okCreated');
         type="success";
-        res.status(HttpStatus.OK).json({message,comercialareas,type});
+        res.status(HttpStatus.OK).json(comercialareas);
       }, (err) => {
         console.dir(err);
         message = properties.get('message.res.errorInternalServer');
@@ -185,7 +185,7 @@ module.exports = {
             .then((coas) => {
               message = properties.get('message.coa.res.coaUpdated');
               type="success";
-              res.status(HttpStatus.OK).json({message,coas,type});
+              res.status(HttpStatus.OK).json(coas);
             }, (err) => {
               console.dir(err);
               message = properties.get('message.res.errorInternalServer');
