@@ -4,7 +4,6 @@ const properties = PropertiesReader(`/opt/node/backend/src/bin/common.properties
 const clientesController = require('../controllers/clientesController');
 const clientesRouter = express.Router();
 const uriClientes = properties.get('routes.api.clientes');
-const uriClientesUpdate = properties.get('routes.api.clientes.id');
 const uriClientesId = properties.get('routes.api.clientes.id');
 
 
@@ -16,11 +15,10 @@ clientesRouter.route(uriClientes)
     .post(clientesController.addClientes)
     .put(clientesController.updateCliente);
 
-clientesRouter.route(uriClientesUpdate)
-    .delete(clientesController.deleteCliente);
 
 clientesRouter.route(uriClientesId)
-    .get(clientesController.getClienteById);
+    .get(clientesController.getClienteById)
+    .put(clientesController.deleteCliente);
 
 
 module.exports = clientesRouter;
