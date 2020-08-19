@@ -13,65 +13,32 @@ module.exports = {
     getAllLeaders(req, res, next) {
 
         let today = new Date();
-        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        let dateTime = date+' '+time;
-    
-        models.leaders.findAll( {
-          where: {
-            leaValidTo: {
-              [Op.gt]: dateTime
-            }
-          }
-        })
-          .then((leaders) => {
-            if (leaders.length > 0) {
-              type = "success";
-              res.status(HttpStatus.OK).json({ leaders, type });
-            } else {
-              message = properties.get('message.coa.res.notData');
-              type = "Not Data";
-              res.status(HttpStatus.OK).json({ leaders, type });
-            }
-          }, (err) => {
-            console.dir(err);
-            message = properties.get('message.res.errorInternalServer');
-            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message });
-            next(err);
-          });
-      },
+        let dateTime = date + ' ' + time;
 
+        models.leaders.findAll({
+                where: {
+                    leaValidTo: {
+                        [Op.gt]: dateTime
+                    }
+                }
+            })
+            .then((leaders) => {
+                if (leaders.length > 0) {
+                    type = "success";
+                    res.status(HttpStatus.OK).json({ leaders, type });
+                } else {
+                    message = properties.get('message.coa.res.notData');
+                    type = "Not Data";
+                    res.status(HttpStatus.OK).json({ leaders, type });
+                }
+            }, (err) => {
+                console.dir(err);
+                message = properties.get('message.res.errorInternalServer');
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message });
+                next(err);
+            });
+    },
 
-
-
-    // getAllLeaders(req,res,next) {
-    
-    //     let today = new Date();
-    //     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate());
-    //     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    //     let dateTime = date+' '+time;
-
-    //     models.leaders.findAll({
-    //             where: {
-    //                 leaValidTo: {[Op.gte]: dateTime}
-    //             }
-    //         }
-    //     )
-    //     .then((leaders) => {
-    //         if(leaders.length > 0) {
-    //             type="success";
-    //             res.status(HttpStatus.OK).json(leaders, type);
-    //         } else {
-    //             message=properties.get('message.stats.res.notData');
-    //             type="Not Data";
-    //             res.status(HttpStatus.OK).json({message,leaders,type});
-    //         }
-    //     },(err) => {
-    //         console.dir(err);
-    //         message = properties.get('message.res.errorInternalServer');
-    //         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
-    //         next(err);
-    //     });
-    // }
-            
-    };
+};

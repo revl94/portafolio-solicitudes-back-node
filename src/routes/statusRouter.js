@@ -5,8 +5,7 @@ const statusController = require('../controllers/statusController');
 const statusRouter = express.Router();
 const uriStatus = properties.get('routes.api.status');
 const uriStatusId = properties.get('routes.api.status.id');
-const uriStatusUpdate = properties.get('routes.api.status.update');
-const uristatusFilter = properties.get('routes.api.status.filter');
+
 /**
  * CRU para STATUS
  * */
@@ -15,14 +14,9 @@ statusRouter.route(uriStatus)
     .post(statusController.addStatus)
     .put(statusController.updateStatus);
 
-statusRouter.route(uriStatusUpdate)
-    
-    .delete(statusController.deleteStatus);
-
 statusRouter.route(uriStatusId)
-    .get(statusController.getStatusById);
+    .get(statusController.getStatusById)
+    .put(statusController.deleteStatus);
 
-statusRouter.route(uristatusFilter)
-    .get(statusController.getAllStatusFilter);
 
 module.exports = statusRouter;

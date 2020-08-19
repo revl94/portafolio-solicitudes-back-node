@@ -9,7 +9,7 @@ const PropertiesReader = require('properties-reader');
 const properties = PropertiesReader(`/opt/node/backend/src/bin/common.properties`);
 
 //Import controllers which hold the CRUD methods for each model
-const requestRouter = require('./src/routes/solicitudesRouter');
+const requestRouter = require('./src/routes/requestTypeRouter');
 // Áreas Comerciales
 const comercialAreasRouter = require('./src/routes/comercialAreasRouter');
 // Áreas Técnicas
@@ -23,7 +23,7 @@ const leaderRouter = require('./src/routes/leaderRouter');
 // Ruta portfolio
 const portfolioRouter = require('./src/routes/requestRouter');
 //Ruta de usuarios
-const userRouter = require('./src/routes/userRouter'); 
+const userRouter = require('./src/routes/userRouter');
 //Ruta de usuariosClientes
 const userClientRouter = require('./src/routes/userClientRouter');
 const axios = require('axios');
@@ -79,7 +79,7 @@ app.use(express.urlencoded({ extended: false }));
  * Se definen todos los enrutadores que utilizara el API
  * */
 
- // Rutas de los Tipos de Solicitudes
+// Rutas de los Tipos de Solicitudes
 app.use(version, requestRouter);
 // Rutas de Áreas Comerciales
 app.use(version, comercialAreasRouter);
@@ -114,6 +114,6 @@ app.use(function(req, res, next) {
 
 //Tell node to listen for the App on port 3000:
 // listen on port 3000
-app.listen(process.env.PORT || 3050, function () {
+app.listen(process.env.PORT || 3050, function() {
     console.log('Express app listening on port 3050');
 });
