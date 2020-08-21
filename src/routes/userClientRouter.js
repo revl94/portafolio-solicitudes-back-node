@@ -20,7 +20,7 @@ userClientRouter.route(uriuserClient)
     .delete(userClientController.deleteUserClient);
 
 userClientRouter.route(uriuserClientId)
-    .get(userClientController.getClienteByUserId);
+    .get(userClientController.getClienteByUserId2);
 
 userClientRouter.route(uriuserClientCheck)
     .post(userClientController.checkIfExist);

@@ -200,4 +200,48 @@ module.exports = {
             });
     },
 
+    getClienteByUserId2(req,res,next) {
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
+        let time = today.getHours() + ':' + today.getMinutes() + '-' + today.getSeconds();
+        let dateTime = date + ' ' + time;
+
+        models.userClient.findAll({
+            where: {
+                userId: {
+                    [Op.like]: req.params.id
+                },
+                ucValidTo: {
+                    [Op.gte]: dateTime
+                }
+            },
+            include: [
+                    {
+                        model: models.client,
+                        as: 'client',
+                        require: true
+                    },
+                    ],
+                    order: [
+                [models.client, 'cliName', 'ASC']
+
+            ],
+        })
+            .then((request) => {
+                if (request.length > 0) {
+                    type = "success";
+                    res.status(HttpStatus.OK).json(request);
+                } else {
+                    message = properties.get('message.usr.res.notData');
+                    type = "Not Data";
+                    res.status(HttpStatus.OK).json(request);
+                }
+            }, (err) => {
+                console.dir(err);
+                message = properties.get('message.res.errorInternalServer');
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(message);
+                next(err);
+            });
+    },
+
 };
