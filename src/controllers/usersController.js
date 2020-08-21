@@ -43,16 +43,16 @@ module.exports = {
         .then((users) => {
             if(users.length > 0) {
                 type="success";
-                res.status(HttpStatus.OK).json({users, type});
+                res.status(HttpStatus.OK).json(users);
             } else {
                 message=properties.get('message.usr.res.notData');
                 type="Not Data";
-                res.status(HttpStatus.OK).json({message,users,type});
+                res.status(HttpStatus.OK).json(users);
             }
         },(err) => {
             console.dir(err);
             message = properties.get('message.res.errorInternalServer');
-            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(message);
             next(err);
         });
     },
