@@ -2340,7 +2340,8 @@ module.exports = {
         let dateTime = date + ' ' + time;
 
 
-        let cliId = (req.query.cliId != null) ? req.query.cliId : "0";
+        let cliId = (req.query.cliId != []) ? req.query.cliId : "0";
+        console.log(req.query.cliId.length)
 
 
         let cliIdArray = cliId.split(",");
@@ -2469,7 +2470,7 @@ module.exports = {
                         if (porfolio) {
                             type = "success";
 
-                            res.status(HttpStatus.OK).json({message, porfolio, type});
+                            res.status(HttpStatus.OK).json(porfolio);
                         }
                     }, (err) => {
                         console.dir(err);

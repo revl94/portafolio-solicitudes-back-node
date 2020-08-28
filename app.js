@@ -9,7 +9,7 @@ const PropertiesReader = require('properties-reader');
 const properties = PropertiesReader(`/opt/node/backend/src/bin/common.properties`);
 
 //Import controllers which hold the CRUD methods for each model
-const requestRouter = require('./src/routes/requestTypeRouter');
+const requestTypeRouter = require('./src/routes/requestTypeRouter');
 // Áreas Comerciales
 const comercialAreasRouter = require('./src/routes/comercialAreasRouter');
 // Áreas Técnicas
@@ -21,7 +21,7 @@ const statusRouter = require('./src/routes/statusRouter');
 // Leader
 const leaderRouter = require('./src/routes/leaderRouter');
 // Ruta portfolio
-const portfolioRouter = require('./src/routes/requestRouter');
+const portfolioRouter = require('./src/routes/requestRouter2');
 //Ruta de usuarios
 const userRouter = require('./src/routes/userRouter');
 //Ruta de usuariosClientes
@@ -80,7 +80,7 @@ app.use(express.urlencoded({ extended: false }));
  * */
 
 // Rutas de los Tipos de Solicitudes
-app.use(version, requestRouter);
+app.use(version, requestTypeRouter);
 // Rutas de Áreas Comerciales
 app.use(version, comercialAreasRouter);
 // Rutas de las Áreas Técnicas
