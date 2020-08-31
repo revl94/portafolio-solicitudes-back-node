@@ -29,7 +29,7 @@ module.exports = {
          console.log(req.query.desde)
          console.log(desde)
          console.log(hasta)
-         console.log(rbutton)
+         console.log(req.query.cliId)
 
          switch (rbutton) {
 
