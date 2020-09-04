@@ -234,7 +234,7 @@ module.exports = {
                 } else {
                     message = properties.get('message.usr.res.notData');
                     type = "Not Data";
-                    res.status(HttpStatus.OK).json(request);
+                    res.status(HttpStatus.OK).json({request, type});
                 }
             }, (err) => {
                 console.dir(err);

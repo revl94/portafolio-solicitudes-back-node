@@ -18,6 +18,7 @@ module.exports = {
         let cliId = (req.query.cliId != []) ? req.query.cliId : "0";
         let coaId = (req.query.coaId != []) ? req.query.coaId : "0";
         let estId = (req.query.estId != []) ? req.query.estId : "0";
+        let cliUIds = (req.query.clientUser != []) ? req.query.clientUser : "0";
         let desde = (req.query.desde != null) ? req.query.desde : "0000-12-30";
         let hasta = (req.query.hasta != null) ? req.query.hasta : "0000-12-31";
         let rbutton = (req.query.rbutton != null) ? req.query.rbutton : 0;
@@ -27,10 +28,11 @@ module.exports = {
         let cliIdArray = cliId.split(",");
         let coaIdArray = coaId.split(",");
         let estIdArray = estId.split(",");
+        let cliUIdArray = cliUIds.split(",");
          console.log(check)
          console.log(desde)
          console.log(cliId)
-         console.log(req.query.cliId)
+         console.log(cliUIdArray)
 
          switch (rbutton) {
 
