@@ -185,7 +185,7 @@ module.exports = {
             .then((request) => {
                 if (request.length > 0) {
                     type = "success";
-                    res.status(HttpStatus.OK).json({message, request, type});
+                    res.status(HttpStatus.OK).json(request);
                 } else {
                     message = properties.get('message.usr.res.notData');
                     type = "Not Data";
