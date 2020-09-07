@@ -18,21 +18,27 @@ module.exports = {
         let cliId = (req.query.cliId != []) ? req.query.cliId : "0";
         let coaId = (req.query.coaId != []) ? req.query.coaId : "0";
         let estId = (req.query.estId != []) ? req.query.estId : "0";
-        let cliUIds = (req.query.clientUser != []) ? req.query.clientUser : "0";
         let desde = (req.query.desde != null) ? req.query.desde : "0000-12-30";
         let hasta = (req.query.hasta != null) ? req.query.hasta : "0000-12-31";
         let rbutton = (req.query.rbutton != null) ? req.query.rbutton : 0;
         let check = req.query.check;
+        let leaId = (req.query.resp != []) ? req.query.resp : "0"
 
 
         let cliIdArray = cliId.split(",");
         let coaIdArray = coaId.split(",");
         let estIdArray = estId.split(",");
-        let cliUIdArray = cliUIds.split(",");
+        let leaIdArray = leaId.split(",");
          console.log(check)
          console.log(desde)
          console.log(cliId)
-         console.log(cliUIdArray)
+         console.log(leaIdArray)
+         if (leaId === '0') {
+            console.log("lider nulo")
+
+         } else if (leaId !== '0') {
+            console.log("Lider no nulo")
+         }
 
          switch (rbutton) {
 
@@ -100,7 +106,8 @@ module.exports = {
         }
         console.log(req.query.desde)
         console.log(req.query.hasta)
-        if (check == 'false') {
+        if (leaId === '0') {
+            if (check == 'false') {
             console.log('aquiii')
 
             if (desde === "0000-12-30" || hasta === "0000-12-31") {
@@ -620,7 +627,7 @@ module.exports = {
 
          }
 
-    } else {
+    } else { // fechas
             console.log("aqui")
         if (cliId === '0' && coaId === '0' && estId === '0') {
 
@@ -703,6 +710,12 @@ module.exports = {
                         estId: {
                             [Op.notIn]: [1, 5]
                         },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
 
                     },
                     include: [
@@ -766,6 +779,12 @@ module.exports = {
                         estId: {
                             [Op.notIn]: [1, 5]
                         },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
 
                     },
                     include: [
@@ -827,6 +846,12 @@ module.exports = {
                         estId: {
                             [Op.in]: estIdArray
                         },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
 
                     },
                     include: [
@@ -893,6 +918,12 @@ module.exports = {
                         cliId: {
                             [Op.in]: cliIdArray
                         },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
 
                     },
                     include: [
@@ -957,6 +988,12 @@ module.exports = {
                         cliId: {
                             [Op.in]: cliIdArray
                         },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
 
                     },
                     include: [
@@ -1021,6 +1058,12 @@ module.exports = {
                         coaId: {
                             [Op.in]: coaIdArray
                         },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
 
                     },
                     include: [
@@ -1088,6 +1131,12 @@ module.exports = {
                         cliId: {
                             [Op.in]: cliIdArray
                         },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
 
                     },
                     include: [
@@ -1664,7 +1713,7 @@ module.exports = {
 
          }
 
-    } else {
+    } else { // fechas
             console.log("aqui")
         if (cliId === '0' && coaId === '0' && estId === '0') {
 
@@ -1747,6 +1796,12 @@ module.exports = {
                         estId: {
                             [Op.eq]: 1
                         },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
 
                     },
                     include: [
@@ -1810,6 +1865,12 @@ module.exports = {
                         estId: {
                             [Op.eq]: 1
                         },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
 
                     },
                     include: [
@@ -1870,6 +1931,1708 @@ module.exports = {
                         },                      
                         estId: {
                             [Op.eq]: 1
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+         } else if (cliId !== '0' && coaId !== '0' && estId === '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId !== '0' && coaId === '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId !== '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId !== '0' && coaId !== '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+
+         }
+
+    }
+
+
+        }
+    } else { // Lider no nulo
+
+        if (check == 'false') {
+            console.log('aquiii')
+
+            if (desde === "0000-12-30" || hasta === "0000-12-31") {
+
+
+            if (cliId === '0' && coaId === '0' && estId === '0') {
+
+            models.request.findAll({
+                where: {
+                    reqRealFinalDate: {
+                        [Op.gt]: dateTime
+                    },
+                    estId: {
+                            [Op.notIn]: [1, 5]
+                        },
+                    leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                },
+                include: [
+                    {
+                        model: models.client,
+                        as: 'client',
+                        require: true
+                    },
+                    {
+                        model: models.comercialAreas,
+                        as: 'comercialAreas',
+
+                    },
+                    {
+                        model: models.entityStatus,
+                        as: 'entityStatus'
+                    },
+                    {
+                        model: models.requestType,
+                        as: 'requestType'
+                    },
+                    {
+                       model: models.technicalArea,
+                        as: 'technicalArea' 
+                    },
+                    {
+                       model: models.user,
+                        as: 'user' 
+                    }
+                ],
+            order: [
+                [models.client, 'cliName', 'ASC'],
+                ['reqPriority', 'ASC'],
+
+            ],
+            })
+            .then((request) => {
+
+                if(request.length > 0) {
+                    type="success";
+                    res.status(HttpStatus.OK).json(request);
+                } else {
+                    message=properties.get('message.request.res.notData');
+                    type="Not Data";
+                    res.status(HttpStatus.OK).json(request);
+                }
+            },(err) => {
+                console.dir(err);
+                message = properties.get('message.res.errorInternalServer');
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(message);
+                next(err);
+            });
+
+         } else if (cliId !== '0' && coaId === '0' && estId === '0') {
+
+             models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        estId: {
+                            [Op.notIn]: [1, 5]
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId !== '0' && estId === '0') {
+                models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        estId: {
+                            [Op.notIn]: [1, 5]
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId === '0' && estId !== '0') {
+
+                models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.in]: estIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+         } else if (cliId !== '0' && coaId !== '0' && estId === '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        estId: {
+                            [Op.notIn]: [1, 5]
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId !== '0' && coaId === '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.in]: estIdArray
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId !== '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.in]: estIdArray
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId !== '0' && coaId !== '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.in]: estIdArray
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+
+         }
+
+    } else {
+            console.log("aqui")
+        if (cliId === '0' && coaId === '0' && estId === '0') {
+
+            models.request.findAll({
+                where: {
+                    reqRealFinalDate: {
+                        [Op.gt]: dateTime
+                    },
+                    estId: {
+                            [Op.notIn]: [1, 5]
+                        },
+                    leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                    [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+                },
+                include: [
+                    {
+                        model: models.client,
+                        as: 'client',
+                        require: true
+                    },
+                    {
+                        model: models.comercialAreas,
+                        as: 'comercialAreas',
+
+                    },
+                    {
+                        model: models.entityStatus,
+                        as: 'entityStatus'
+                    },
+                    {
+                        model: models.requestType,
+                        as: 'requestType'
+                    },
+                    {
+                       model: models.technicalArea,
+                        as: 'technicalArea' 
+                    },
+                    {
+                       model: models.user,
+                        as: 'user' 
+                    }
+                ],
+            order: [
+                [models.client, 'cliName', 'ASC'],
+                ['reqPriority', 'ASC'],
+
+            ],
+            })
+            .then((request) => {
+
+                if(request.length > 0) {
+                    type="success";
+                    res.status(HttpStatus.OK).json(request);
+                } else {
+                    message=properties.get('message.request.res.notData');
+                    type="Not Data";
+                    res.status(HttpStatus.OK).json(request);
+                }
+            },(err) => {
+                console.dir(err);
+                message = properties.get('message.res.errorInternalServer');
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(message);
+                next(err);
+            });
+
+         } else if (cliId !== '0' && coaId === '0' && estId === '0') {
+
+             models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        estId: {
+                            [Op.notIn]: [1, 5]
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId !== '0' && estId === '0') {
+                models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        estId: {
+                            [Op.notIn]: [1, 5]
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId === '0' && estId !== '0') {
+
+                models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.in]: estIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+         } else if (cliId !== '0' && coaId !== '0' && estId === '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        estId: {
+                            [Op.notIn]: [1, 5]
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId !== '0' && coaId === '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.in]: estIdArray
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId !== '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.in]: estIdArray
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId !== '0' && coaId !== '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.in]: estIdArray
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+
+         }
+
+    }
+
+
+        } else if (check == 'true') {
+
+            if (desde === "0000-12-30" || hasta === "0000-12-31") {
+
+
+            if (cliId === '0' && coaId === '0' && estId === '0') {
+
+            models.request.findAll({
+                where: {
+                    reqRealFinalDate: {
+                        [Op.gt]: dateTime
+                    },
+                    estId: {
+                            [Op.eq]: 1
+                        },
+                    leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                },
+                include: [
+                    {
+                        model: models.client,
+                        as: 'client',
+                        require: true
+                    },
+                    {
+                        model: models.comercialAreas,
+                        as: 'comercialAreas',
+
+                    },
+                    {
+                        model: models.entityStatus,
+                        as: 'entityStatus'
+                    },
+                    {
+                        model: models.requestType,
+                        as: 'requestType'
+                    },
+                    {
+                       model: models.technicalArea,
+                        as: 'technicalArea' 
+                    },
+                    {
+                       model: models.user,
+                        as: 'user' 
+                    }
+                ],
+            order: [
+                [models.client, 'cliName', 'ASC'],
+                ['reqPriority', 'ASC'],
+
+            ],
+            })
+            .then((request) => {
+
+                if(request.length > 0) {
+                    type="success";
+                    res.status(HttpStatus.OK).json(request);
+                } else {
+                    message=properties.get('message.request.res.notData');
+                    type="Not Data";
+                    res.status(HttpStatus.OK).json(request);
+                }
+            },(err) => {
+                console.dir(err);
+                message = properties.get('message.res.errorInternalServer');
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(message);
+                next(err);
+            });
+
+         } else if (cliId !== '0' && coaId === '0' && estId === '0') {
+
+             models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId !== '0' && estId === '0') {
+                models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId === '0' && estId !== '0') {
+
+                models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
                         },
 
                     },
@@ -1937,6 +3700,9 @@ module.exports = {
                         cliId: {
                             [Op.in]: cliIdArray
                         },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
 
                     },
                     include: [
@@ -2001,6 +3767,9 @@ module.exports = {
                         cliId: {
                             [Op.in]: cliIdArray
                         },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
 
                     },
                     include: [
@@ -2064,6 +3833,9 @@ module.exports = {
                         },
                         coaId: {
                             [Op.in]: coaIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
                         },
 
                     },
@@ -2132,6 +3904,597 @@ module.exports = {
                         cliId: {
                             [Op.in]: cliIdArray
                         },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+
+         }
+
+    } else { // fechas
+            console.log("aqui")
+        if (cliId === '0' && coaId === '0' && estId === '0') {
+
+            models.request.findAll({
+                where: {
+                    reqRealFinalDate: {
+                        [Op.gt]: dateTime
+                    },
+                    estId: {
+                            [Op.eq]: 1
+                        },
+                    leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                    [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+                },
+                include: [
+                    {
+                        model: models.client,
+                        as: 'client',
+                        require: true
+                    },
+                    {
+                        model: models.comercialAreas,
+                        as: 'comercialAreas',
+
+                    },
+                    {
+                        model: models.entityStatus,
+                        as: 'entityStatus'
+                    },
+                    {
+                        model: models.requestType,
+                        as: 'requestType'
+                    },
+                    {
+                       model: models.technicalArea,
+                        as: 'technicalArea' 
+                    },
+                    {
+                       model: models.user,
+                        as: 'user' 
+                    }
+                ],
+            order: [
+                [models.client, 'cliName', 'ASC'],
+                ['reqPriority', 'ASC'],
+
+            ],
+            })
+            .then((request) => {
+
+                if(request.length > 0) {
+                    type="success";
+                    res.status(HttpStatus.OK).json(request);
+                } else {
+                    message=properties.get('message.request.res.notData');
+                    type="Not Data";
+                    res.status(HttpStatus.OK).json(request);
+                }
+            },(err) => {
+                console.dir(err);
+                message = properties.get('message.res.errorInternalServer');
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(message);
+                next(err);
+            });
+
+         } else if (cliId !== '0' && coaId === '0' && estId === '0') {
+
+             models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId !== '0' && estId === '0') {
+                models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId === '0' && estId !== '0') {
+
+                models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+         } else if (cliId !== '0' && coaId !== '0' && estId === '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId !== '0' && coaId === '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId === '0' && coaId !== '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
+
+                    },
+                    include: [
+                        {
+                            model: models.client,
+                            as: 'client',
+                            require: true
+
+                        },
+                        {
+                            model: models.comercialAreas,
+                            as: 'comercialAreas',
+
+                        },
+                        {
+                            model: models.entityStatus,
+                            as: 'entityStatus'
+                        },
+                        {
+                            model: models.requestType,
+                            as: 'requestType'
+                        },
+                        {
+                            model: models.technicalArea,
+                            as: 'technicalArea'
+                        },
+                        {
+                            model: models.user,
+                            as: 'user'
+                        }
+                    ],
+                    order: [
+                        [models.client, 'cliName', 'ASC'],
+                        ['reqPriority', 'ASC'],
+
+                    ],
+
+                })
+                    .then((porfolio) => {
+                        if (porfolio) {
+                            type = "success";
+
+                            res.status(HttpStatus.OK).json(porfolio);
+                        }
+                    }, (err) => {
+                        console.dir(err);
+                        message = properties.get('message.res.errorInternalServer');
+                        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                        next(err);
+                    });
+
+         } else if (cliId !== '0' && coaId !== '0' && estId !== '0') {
+
+            models.request.findAll({
+                    where: {
+                        reqRealFinalDate: {
+                            [Op.gt]: dateTime
+                        },                      
+                        estId: {
+                            [Op.eq]: 1
+                        },
+                        coaId: {
+                            [Op.in]: coaIdArray
+                        },
+                        cliId: {
+                            [Op.in]: cliIdArray
+                        },
+                        leaId: {
+                            [Op.in]: leaIdArray
+                        },
+                        [Op.or]: {
+                                    reqRequestDate: {[Op.between]: [desdereqRequestDate, hastareqRequestDate],},
+                                    reqInitialDate: {[Op.between]: [desdereqInitialDate, hastareqInitialDate],},
+                                    reqPlanFinalDate: {[Op.between]: [desdereqPlanFinalDate, hastareqPlanFinalDate],},
+                                    reqRealFinalDate: {[Op.between]: [desdereqRealFinalDate, hastareqRealFinalDate],},
+                                }
 
                     },
                     include: [
@@ -2190,6 +4553,8 @@ module.exports = {
 
 
         }
+    }
+        
 
         
     },
