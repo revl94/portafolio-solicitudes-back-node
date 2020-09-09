@@ -4558,6 +4558,41 @@ module.exports = {
 
         
     },
+
+    getRequestByID(req, res, next) {
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        let time = today.getHours() + ':' + today.getMinutes() + '-' + today.getSeconds();
+        let dateTime = date + ' ' + time;
+
+        models.request.findAll({
+                where: {
+                    reqId: {
+                        [Op.like]: req.params.id
+                    },
+                    reqRealFinalDate: {
+                        [Op.gt]: dateTime
+                    }
+                }
+            })
+            .then((request) => {
+                if (request.length > 0) {
+                    type = "success";
+                    res.status(HttpStatus.OK).json(request);
+                } else {
+                    message = properties.get('message.cli.res.notData');
+                    type = "Not Data";
+                    res.status(HttpStatus.OK).json(request);
+                }
+            }, (err) => {
+                console.dir(err);
+                message = properties.get('message.res.errorInternalServer');
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(message);
+                next(err);
+            });
+    },
+
+
     // Creación de Solicitud
     CreateRequest (req,res,next){
         let today = new Date();
@@ -4667,7 +4702,7 @@ module.exports = {
          let dateTime = date+' '+time;
         models.request.findOne({
             where: {
-                reqId: req.body.reqId
+                reqId: req.params.id
             }
         })
             .then((request) => {
@@ -4678,17 +4713,17 @@ module.exports = {
                         .then((request) => {
                             message = properties.get('message.request.res.reqUpdated');
                             type = "success";
-                            res.status(HttpStatus.OK).json({message, request, type});
+                            res.status(HttpStatus.OK).json(type);
                         }, (err) => {
                             console.dir(err);
                             message = properties.get('message.res.errorInternalServer');
-                            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message});
+                            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(message);
                             next(err);
                         });
                 }
             }, (err) => {
                 message = properties.get('message.stats.res.notDataToUpdate');
-                res.status(HttpStatus.NOT_FOUND).json({message});
+                res.status(HttpStatus.NOT_FOUND).json(message);
                 next(err);
             });
     },

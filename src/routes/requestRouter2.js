@@ -5,15 +5,19 @@ const requestController = require('../controllers/requestController.js');
 const requestRouter2 = express.Router();
 const uriGet = properties.get('routes.api.portfolio');
 const uriUpdate = properties.get('routes.api.updatemodal');
+const uriId = properties.get('routes.api.portfolio.id');
 
 
 requestRouter2.route(uriGet)
-    .get(requestController.getAllRequests)
-    .put(requestController.UpdateRequestDate);
+    .get(requestController.getAllRequests);
+    
 requestRouter2.route(uriGet)
     .post(requestController.CreateRequest);
-requestRouter2.route(uriUpdate)
-    .put(requestController.UpdateRequest);
+    
+requestRouter2.route(uriId)
+    //.put(requestController.UpdateRequest)
+    .get(requestController.getRequestByID)
+    .put(requestController.UpdateRequestDate);
 
 
 
