@@ -4564,14 +4564,14 @@ module.exports = {
         let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         let time = today.getHours() + ':' + today.getMinutes() + '-' + today.getSeconds();
         let dateTime = date + ' ' + time;
-
+        console.log(dateTime)
         models.request.findAll({
                 where: {
                     reqId: {
                         [Op.like]: req.params.id
                     },
                     reqRealFinalDate: {
-                        [Op.gt]: dateTime
+                        [Op.gte]: dateTime
                     }
                 }
             })
@@ -4596,9 +4596,10 @@ module.exports = {
     // Creación de Solicitud
     CreateRequest (req,res,next){
         let today = new Date();
-        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate());
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()+1);
         let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         let dateTime = date+' '+time;
+        console.log(dateTime)
         let body = req.body;
         models.request.create({
             cliId: body.cliId,
@@ -4606,14 +4607,14 @@ module.exports = {
             leaId: body.leaId,
             typId: body.typId,
             estId: (body.estId != null) ? body.estId : 1,
-            teaId:(body.teaId != null) ? body.teaId : null,
+            teaId:(body.teaId !== "") ? body.teaId : null,
             reqTitle: body.reqTitle,
             reqDescription: body.reqDescription,
             reqPriority: (body.reqPriority != null) ? body.reqPriority : 0,
-            reqRequestDate: (body.reqRequestDate === dateTime) ? body.reqRequestDate : dateTime,
+            reqRequestDate: (body.reqRequestDate != null) ? body.reqRequestDate : dateTime,
             reqInitialDate: (body.reqInitialDate != null) ? body.reqInitialDate : "9999-12-31",
             reqPlanFinalDate: (body.reqPlanFinalDate != null) ? body.reqPlanFinalDate : "9999-12-31",
-            reqRealFinalDate: (body.reqRealFinalDate != null) ? body.reqRealFinalDate : body.reqPlanFinalDate,
+            reqRealFinalDate: (body.reqRealFinalDate != null) ? body.reqRealFinalDate : dateTime,
             reqUpdateStatusDate: (body.reqUpdateStatusDate != null) ? body.reqUpdateStatusDate : dateTime,
             reqAdvancePtge: (body.reqAdvancePtge != null) ? body.reqAdvancePtge : 0,
             reqDeviationsPtge: (body.reqDeviationsPtge != null) ? body.reqDeviationsPtge : 0,
