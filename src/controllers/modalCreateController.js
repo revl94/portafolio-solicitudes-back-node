@@ -84,7 +84,7 @@ module.exports = {
             leaId: body.leaId,
             typId: body.typId,
             estId: (body.estId != null) ? body.estId : 1,
-            teaId:(body.teaId != null) ? body.teaId : null,
+            teaId:(body.teaId != undefined) ? body.teaId : null,
             reqTitle: body.reqTitle,
             reqDescription: body.reqDescription,
             reqPriority: (body.reqPriority != null) ? body.reqPriority : 0,
