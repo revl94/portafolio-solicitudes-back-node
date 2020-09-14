@@ -4573,7 +4573,35 @@ module.exports = {
                     reqRealFinalDate: {
                         [Op.gte]: dateTime
                     }
-                }
+                },
+                 include: [
+                    {
+                        model: models.client,
+                        as: 'client',
+                        require: true
+                    },
+                    {
+                        model: models.comercialAreas,
+                        as: 'comercialAreas',
+
+                    },
+                    {
+                        model: models.entityStatus,
+                        as: 'entityStatus'
+                    },
+                    {
+                        model: models.requestType,
+                        as: 'requestType'
+                    },
+                    {
+                       model: models.technicalArea,
+                        as: 'technicalArea' 
+                    },
+                    {
+                       model: models.user,
+                        as: 'user' 
+                    }
+                ],
             })
             .then((request) => {
                 if (request.length > 0) {
@@ -4646,7 +4674,7 @@ module.exports = {
         let dateTime = date+' '+time;
         models.request.findOne({
             where: {
-                reqId: req.params.id
+                reqId: req.body.reqId
             }
         })
             .then((request) => {
