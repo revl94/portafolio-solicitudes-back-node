@@ -12,7 +12,8 @@ requestRouter2.route(uriGet)
     .get(requestController.getAllRequests);
     
 requestRouter2.route(uriGet)
-    .post(requestController.CreateRequest);
+    .post(requestController.CreateRequest)
+    .put(requestController.UpdateRequest);
     
 requestRouter2.route(uriId)
     //.put(requestController.UpdateRequest)
