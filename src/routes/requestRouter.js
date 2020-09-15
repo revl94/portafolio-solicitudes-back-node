@@ -1,6 +1,6 @@
 const express = require('express');
 const PropertiesReader = require('properties-reader');
-const properties = PropertiesReader(`/opt/node/backend/src/bin/common.properties`);
+const properties = PropertiesReader(process.env.PATH_PROPERTIES);
 const modalController = require('../controllers/modalCreateController');
 const requestRouter = express.Router();
 const uriGet = properties.get('routes.api.portfolio');

@@ -2,7 +2,7 @@ const models = require('../models');
 const Sequelize = require('sequelize');
 const HttpStatus = require('http-status-codes');
 const PropertiesReader = require('properties-reader');
-const properties = PropertiesReader(`/opt/node/backend/src/bin/common.properties`);
+const properties = PropertiesReader(process.env.PATH_PROPERTIES);
 
 let message;
 let type;

@@ -1,6 +1,6 @@
 const express = require('express');
 const PropertiesReader = require('properties-reader');
-const properties = PropertiesReader(`/opt/node/backend/src/bin/common.properties`);
+const properties = PropertiesReader(process.env.PATH_PROPERTIES);
 const clientesController = require('../controllers/clientesController');
 const clientesRouter = express.Router();
 const uriClientes = properties.get('routes.api.clientes');

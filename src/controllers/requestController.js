@@ -2,7 +2,7 @@ const models = require('../models');
 const Sequelize = require('sequelize');
 const HttpStatus = require('http-status-codes');
 const PropertiesReader = require('properties-reader');
-const properties = PropertiesReader(`/opt/node/backend/src/bin/common.properties`);
+const properties = PropertiesReader(process.env.PATH_PROPERTIES);
 const Op = Sequelize.Op;
 let message;
 let type;
@@ -4569,9 +4569,6 @@ module.exports = {
                 where: {
                     reqId: {
                         [Op.like]: req.params.id
-                    },
-                    reqRealFinalDate: {
-                        [Op.gte]: dateTime
                     }
                 },
                  include: [
@@ -4686,7 +4683,7 @@ module.exports = {
                         leaId: (body.leaId != null) ? body.leaId : request.leaId,
                         typId: (body.typId != null) ? body.typId : request.typId,
                         estId: (body.estId != null) ? body.estId : request.estId,
-                        teaId: (body.teaId != null) ? body.teaId : null,
+                        teaId: (body.teaId !== "") ? body.teaId : null,
                         reqTitle: (body.reqTitle != null) ? body.reqTitle : request.reqTitle,
                         reqDescription: (body.reqDescription != null) ? body.reqDescription : request.reqDescription,
                         reqPriority: (body.reqPriority != null) ? body.reqPriority : request.reqPriority,
