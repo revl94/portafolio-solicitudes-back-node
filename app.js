@@ -6,7 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const winston = require('winston');
 const PropertiesReader = require('properties-reader');
-const properties = PropertiesReader(`/opt/node/backend/src/bin/common.properties`);
+const properties = PropertiesReader(process.env.PATH_PROPERTIES);
 
 //Import controllers which hold the CRUD methods for each model
 const requestTypeRouter = require('./src/routes/requestTypeRouter');
