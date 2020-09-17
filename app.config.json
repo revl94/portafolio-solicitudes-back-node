@@ -1,0 +1,8 @@
+{
+    "apps": [{
+        "name": "portafolio-solicitudes-node",
+        "script": "npx",
+        "interpreter": "none",
+        "args": "npm start"
+    }]
+}
